@@ -7,7 +7,7 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.post("/launch")
+@app.get("/launch")
 async def launch(message):
     print(message)
     return message
