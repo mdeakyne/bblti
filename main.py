@@ -8,7 +8,8 @@ async def root():
     return {"message": "Hello World"}
 
 @app.get("/launch")
-async def launch(message):
-    print(message)
-    return message
+async def launch(**kwargs):
+    for key, value in kwargs.items():
+        print ("%s == %s" %(key, value))
+    return kwargs
 
