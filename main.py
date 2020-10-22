@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Form
 from urllib.parse import unquote
 from pydantic import BaseModel
 from typing import Optional
@@ -14,7 +14,7 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post('/')
-async def root(id_token: Optional[str] = Body(None), state: Optional[str] = Body(None)):
+async def root(id_token: Optional[str] = Form(...), state: Optional[str] = Form(...)):
     print(id_token, state)
     return id_token
 
