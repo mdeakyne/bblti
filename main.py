@@ -1,13 +1,8 @@
 from fastapi import FastAPI, Header
 from urllib.parse import unquote
-from pydantic import BaseModel
 
 app = FastAPI()
 
-
-
-class Item(BaseModel):
-    id_token
 
 
 @app.get("/")
