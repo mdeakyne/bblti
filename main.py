@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Header
 from urllib.parse import unquote
 from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 
