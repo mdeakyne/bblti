@@ -14,9 +14,9 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post('/')
-async def root(item: Optional[str] = Header(None)):
-    print(item)
-    return item
+async def root(id_token: Optional[str] = Header(None), state: Optional[str] = Header(None)):
+    print(id_token, state)
+    return id_token
 
 
 @app.get("/launch")
