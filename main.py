@@ -7,7 +7,7 @@ app = FastAPI()
 
 
 class Item(BaseModel):
-    jwt: str
+    id_token
 
 
 @app.get("/")
@@ -15,9 +15,9 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post('/')
-async def root(item: Item):
-    print('Launched the application')
-    print(item)
+async def root(id_token, state):
+    print(id_token)
+    print(state)
     return {'message':'What will happen?'}
 
 
