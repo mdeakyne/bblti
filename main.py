@@ -13,7 +13,7 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post('/')
-async def root(item: Item):
+async def root(item: Optional[str] = Header(None)):
     print(item)
     return item
 
