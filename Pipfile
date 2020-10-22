@@ -10,6 +10,7 @@ jupyterlab = "*"
 fastapi = "*"
 justpy = "*"
 bbrest = "*"
+python-multipart = "*"
 
 [requires]
 python_version = "3.8"
