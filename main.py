@@ -1,19 +1,21 @@
 from fastapi import FastAPI, Header
 from urllib.parse import unquote
+from pydantic import BaseModel
 
 app = FastAPI()
 
-
+class Item(BaseModel):
+    state: str
+    id_token: str
 
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
 @app.post('/')
-async def root(id_token, state):
-    print(id_token)
-    print(state)
-    return {'message':'What will happen?'}
+async def root(item: Item):
+    print(item)
+    return item
 
 
 @app.get("/launch")
