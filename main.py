@@ -8,8 +8,9 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post('/')
-async def root():
+async def root(**kwargs):
     print('Launched the application')
+    print(kwargs)
     return {'message':'What will happen?'}
 
 @app.get("/launch")
