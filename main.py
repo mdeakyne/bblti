@@ -1,6 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 from urllib.parse import unquote
+from pydantic import BaseModel
+
 app = FastAPI()
+
+
+
+class Item(BaseModel):
+    jwt: str
 
 
 @app.get("/")
@@ -8,10 +15,11 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post('/')
-async def root(**kwargs):
+async def root(item: Item):
     print('Launched the application')
-    print(kwargs)
+    print(item)
     return {'message':'What will happen?'}
+
 
 @app.get("/launch")
 async def launch(iss, login_hint, target_link_uri, lti_message_hint):
