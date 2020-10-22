@@ -1,11 +1,16 @@
 from fastapi import FastAPI
-
+from urllib.parse import unquote
 app = FastAPI()
 
 
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+@app.post('/')
+async def root():
+    print('Launched the application')
+    return {'message':'What will happen?'}
 
 @app.get("/launch")
 async def launch(iss, login_hint, target_link_uri, lti_message_hint):
