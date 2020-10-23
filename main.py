@@ -3,9 +3,7 @@ from typing import Optional
 from jose import jwt
 
 import requests
-from dotenv import load_dotenv
 from os import getenv as ge
-load_dotenv()
 
 app = FastAPI()
 
@@ -21,8 +19,12 @@ async def root():
 
 @app.post('/')
 async def root(id_token: Optional[str] = Form(...), state: Optional[str] = Form(...)):
-    print(id_token)
-    return {'jwt':id_token}
+    key_dict = requests.get(KEY_SET_URL).json()
+    key = [key for key in key_dict['keys'] if key['kid'] == APPID][0]
+    
+    token = id_token
+
+    return jwt.decode(token, key=key, audience=APPID)
 
 
 @app.get("/launch")
@@ -38,13 +40,5 @@ async def launch(iss, login_hint, target_link_uri, lti_message_hint):
                 'scope':'openid',
                 'state':'a unique value '})
     
-    print(resp.json())
-
-
-    key_dict = requests.get(KEY_SET_URL).json()
-    key = [key for key in key_dict['keys'] if key['kid'] == APPID][0]
-    
-    token = resp.json()['jwt']
-
-    return jwt.decode(token, key=key, audience=APPID)
+    print(resp.status_code)
     
