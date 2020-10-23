@@ -5,7 +5,7 @@ from typing import Optional
 from jose import jwt
 
 import requests
-import getenv as ge
+from os import getenv as ge
 
 app = FastAPI()
 
