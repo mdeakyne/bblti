@@ -3,7 +3,9 @@ from typing import Optional
 from jose import jwt
 
 import requests
+from dotenv import load_dotenv
 from os import getenv as ge
+load_dotenv()
 
 app = FastAPI()
 
