@@ -21,10 +21,10 @@ async def root():
 async def root(id_token: Optional[str] = Form(...), state: Optional[str] = Form(...)):
     key_dict = requests.get(KEY_SET_URL).json()
     key = [key for key in key_dict['keys'] if key['kid'] == APPID][0]
-    
-    token = id_token
-
-    return jwt.decode(token, key=key, audience=APPID)
+    print(key)
+    print(id_token)
+    print(jwt.decode(id_token, key=key, audience=APPID))
+    return id_token
 
 
 @app.get("/launch")
