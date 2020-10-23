@@ -7,7 +7,11 @@ from os import getenv as ge
 
 app = FastAPI()
 
+APPID = ge('appid')
+KEY_SET_URL = ge('key_set_url')
 
+print(f"AppId is {APPID}")
+print(f"Key Set Url is {KEY_SET_URL}")
 
 @app.get("/")
 async def root():
@@ -25,7 +29,7 @@ async def launch(iss, login_hint, target_link_uri, lti_message_hint):
         ge('auth_endpoint'), 
         params={'login_hint':login_hint, 
                 'lti_message_hint':lti_message_hint,
-                'client_id':ge("appid"),
+                'client_id':APPID,
                 'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
                 'redirect_uri':target_link_uri,
                 'response_type':'id_token',
@@ -35,10 +39,10 @@ async def launch(iss, login_hint, target_link_uri, lti_message_hint):
     print(resp.json())
 
 
-    key_dict = requests.get(ge('key_set_url')).json()
-    key = [key for key in key_dict['keys'] if key['kid'] == ge('appid')][0]
+    key_dict = requests.get(KEY_SET_URL).json()
+    key = [key for key in key_dict['keys'] if key['kid'] == APPID][0]
     
     token = resp.json()['jwt']
 
-    return jwt.decode(token, key=key, audience=ge('appid'))
+    return jwt.decode(token, key=key, audience=APPID)
     
