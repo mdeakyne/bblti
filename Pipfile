@@ -11,6 +11,7 @@ fastapi = "*"
 justpy = "*"
 bbrest = "*"
 python-multipart = "*"
+python-jose = "*"
 
 [requires]
 python_version = "3.8"
