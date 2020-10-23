@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Form
 from typing import Optional
+from starlette.responses import RedirectResponse
 from jose import jwt
 
 import requests
@@ -10,8 +11,6 @@ app = FastAPI()
 APPID = ge('appid')
 KEY_SET_URL = ge('key_set_url')
 
-print(f"AppId is {APPID}")
-print(f"Key Set Url is {KEY_SET_URL}")
 
 @app.get("/")
 async def root():
@@ -29,7 +28,7 @@ async def root(id_token: Optional[str] = Form(...), state: Optional[str] = Form(
 
 @app.get("/launch")
 async def launch(iss, login_hint, target_link_uri, lti_message_hint):
-    resp = requests.get(
+    url = requests.get(
         ge('auth_endpoint'), 
         params={'login_hint':login_hint, 
                 'lti_message_hint':lti_message_hint,
@@ -38,7 +37,7 @@ async def launch(iss, login_hint, target_link_uri, lti_message_hint):
                 'redirect_uri':target_link_uri,
                 'response_type':'id_token',
                 'scope':'openid',
-                'state':'a unique value '})
+                'state':'a unique value '}).url
     
-    print(resp.status_code)
+    return RedirectResponse(url=url)
     
