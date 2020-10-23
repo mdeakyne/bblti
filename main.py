@@ -1,6 +1,4 @@
 from fastapi import FastAPI, Form
-from urllib.parse import unquote
-from pydantic import BaseModel
 from typing import Optional
 from jose import jwt
 
@@ -9,9 +7,7 @@ from os import getenv as ge
 
 app = FastAPI()
 
-class Item(BaseModel):
-    state: str
-    id_token: str
+
 
 @app.get("/")
 async def root():
@@ -19,6 +15,7 @@ async def root():
 
 @app.post('/')
 async def root(id_token: Optional[str] = Form(...), state: Optional[str] = Form(...)):
+    print(id_token)
     return {'jwt':id_token}
 
 
@@ -35,6 +32,7 @@ async def launch(iss, login_hint, target_link_uri, lti_message_hint):
                 'scope':'openid',
                 'state':'a unique value '})
     
+    print(resp.json())
 
 
     key_dict = requests.get(ge('key_set_url')).json()
