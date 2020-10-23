@@ -26,11 +26,11 @@ async def root(id_token: Optional[str] = Form(...), state: Optional[str] = Form(
 async def launch(iss, login_hint, target_link_uri, lti_message_hint):
     resp = requests.get(
         ge('auth_endpoint'), 
-        params={'login_hint':message_params['login_hint'], 
-                'lti_message_hint':message_params['lti_message_hint'],
+        params={'login_hint':login_hint, 
+                'lti_message_hint':lti_message_hint,
                 'client_id':ge("appid"),
                 'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
-                'redirect_uri':message_params['target_link_uri'],
+                'redirect_uri':target_link_uri,
                 'response_type':'id_token',
                 'scope':'openid',
                 'state':'a unique value '})
