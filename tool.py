@@ -55,5 +55,4 @@ async def main(request):
     wp.add(jp.P(text='This is the main page'))
     return wp
 
-jp.justpy(start_server=False)
-    
+jp.justpy()   
