@@ -20,6 +20,8 @@ async def hello(request):
 async def launch(request):
     wp = jp.WebPage()
     url = ''
+    print(BACKEND_URL)
+    
     if len(request.query_params) > 0:
         for key, value in request.query_params.items():
             jp.P(text=f'{key}: {value}', a=wp, classes='text-xl m-2 p-1')
@@ -27,6 +29,8 @@ async def launch(request):
         login_hint = request.query_params['login_hint']
         lti_message_hint = request.query_params['lti_message_hint']
         target_link_uri = request.query_params['target_link_uri']
+
+        print(login_hint, lti_message_hint, target_link_uri)
 
         url = requests.get(
             ge('auth_endpoint'), 
