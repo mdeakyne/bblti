@@ -22,7 +22,7 @@ async def launch(request):
     wp = jp.WebPage()
     url = ''
     print(BACKEND_URL)
-
+    print(APP_ID)
     if len(request.query_params) > 0:
         login_hint = request.query_params['login_hint']
         lti_message_hint = request.query_params['lti_message_hint']
@@ -39,7 +39,7 @@ async def launch(request):
                     'redirect_uri':BACKEND_URL,
                     'response_type':'id_token',
                     'scope':'openid',
-                    'state':'a unique value '}).url
+                    'state':'a unique value'}).url
         
     else:
         wp.add(jp.P(text="NO QUERY PARAMS"))
