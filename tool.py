@@ -29,17 +29,17 @@ async def launch(request):
         target_link_uri = request.query_params['target_link_uri']
 
         url = requests.get(
-        ge('auth_endpoint'), 
-        params={'login_hint':login_hint, 
-                'lti_message_hint':lti_message_hint,
-                'client_id':ge('appid'),
-                'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
-                'redirect_uri':BACKEND_URL,
-                'response_type':'id_token',
-                'scope':'openid',
-                'state':'a unique value '}).url
+            ge('auth_endpoint'), 
+            params={'login_hint':login_hint, 
+                    'lti_message_hint':lti_message_hint,
+                    'client_id':ge('appid'),
+                    'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
+                    'redirect_uri':BACKEND_URL,
+                    'response_type':'id_token',
+                    'scope':'openid',
+                    'state':'a unique value '}).url
     else:
-        jp.P(text="NO QUERY PARAMS")
+        wp.add(jp.P(text="NO QUERY PARAMS"))
     
     
     
