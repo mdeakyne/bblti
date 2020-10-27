@@ -5,6 +5,7 @@ import requests
 
 app = jp.app
 BACKEND_URL = ge('backend')
+APP_ID = ge('appid')
 
 load_dotenv()
 session_data={}
@@ -33,7 +34,7 @@ async def launch(request):
             ge('auth_endpoint'), 
             params={'login_hint':login_hint, 
                     'lti_message_hint':lti_message_hint,
-                    'client_id':ge('appid'),
+                    'client_id':APP_ID,
                     'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
                     'redirect_uri':BACKEND_URL,
                     'response_type':'id_token',
