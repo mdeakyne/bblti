@@ -28,7 +28,7 @@ async def launch(request):
         target_link_uri = request.query_params['target_link_uri']
     else:
         jp.P(text="NO QUERY PARAMS")
-    """
+    
     url = requests.get(
         ge('auth_endpoint'), 
         params={'login_hint':login_hint, 
@@ -41,7 +41,7 @@ async def launch(request):
                 'state':'a unique value '}).url
     
     wp.add(jp.P(text=f"URL is {url}"))
-    """
+    
     return wp
    
 
