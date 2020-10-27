@@ -23,9 +23,6 @@ async def launch(request):
     print(BACKEND_URL)
 
     if len(request.query_params) > 0:
-        for key, value in request.query_params.items():
-            jp.P(text=f'{key}: {value}', a=wp, classes='text-xl m-2 p-1')
-
         login_hint = request.query_params['login_hint']
         lti_message_hint = request.query_params['lti_message_hint']
         target_link_uri = request.query_params['target_link_uri']
