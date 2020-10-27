@@ -7,7 +7,6 @@ BACKEND_URL = ge('backend')
 
 load_dotenv()
 session_data={}
-app = jp.app
 
 @jp.SetRoute('/hello')
 async def hello(request):
@@ -55,4 +54,4 @@ async def main(request):
     wp.add(jp.P(text='This is the main page'))
     return wp
 
-jp.justpy()   
+jp.justpy()
