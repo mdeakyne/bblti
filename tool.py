@@ -19,6 +19,7 @@ async def hello(request):
 @jp.SetRoute('/launch')
 async def launch(request):
     wp = jp.WebPage()
+    url = ''
     if len(request.query_params) > 0:
         for key, value in request.query_params.items():
             jp.P(text=f'{key}: {value}', a=wp, classes='text-xl m-2 p-1')
@@ -26,10 +27,8 @@ async def launch(request):
         login_hint = request.query_params['login_hint']
         lti_message_hint = request.query_params['lti_message_hint']
         target_link_uri = request.query_params['target_link_uri']
-    else:
-        jp.P(text="NO QUERY PARAMS")
-    
-    url = requests.get(
+
+        url = requests.get(
         ge('auth_endpoint'), 
         params={'login_hint':login_hint, 
                 'lti_message_hint':lti_message_hint,
@@ -39,6 +38,10 @@ async def launch(request):
                 'response_type':'id_token',
                 'scope':'openid',
                 'state':'a unique value '}).url
+    else:
+        jp.P(text="NO QUERY PARAMS")
+    
+    
     
     wp.add(jp.P(text=f"URL is {url}"))
     
