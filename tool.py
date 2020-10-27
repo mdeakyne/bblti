@@ -44,7 +44,7 @@ async def launch(request):
         wp.add(jp.P(text="NO QUERY PARAMS"))
     
     
-    wp.redirect_uri = url
+    wp.redirect = url
     
     return wp
    
