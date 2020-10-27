@@ -3,6 +3,7 @@ from os import getenv as ge
 from dotenv import load_dotenv
 import requests
 
+app = jp.app
 BACKEND_URL = ge('backend')
 
 load_dotenv()
@@ -54,4 +55,4 @@ async def main(request):
     wp.add(jp.P(text='This is the main page'))
     return wp
 
-jp.justpy()
+jp.justpy(start_server=False)

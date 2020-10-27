@@ -1,1 +1,1 @@
-web: python tool.py
+web: uvicorn tool:app --reload --port=${PORT:-5000}
