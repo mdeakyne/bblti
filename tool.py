@@ -30,7 +30,7 @@ async def launch(request):
 
         print(login_hint, lti_message_hint, target_link_uri)
         
-        url = requests.get(
+        resp = requests.get(
             ge('auth_endpoint'), 
             params={'login_hint':login_hint, 
                     'lti_message_hint':lti_message_hint,
@@ -39,13 +39,14 @@ async def launch(request):
                     'redirect_uri':BACKEND_URL,
                     'response_type':'id_token',
                     'scope':'openid',
-                    'state':'a unique value'}).url
+                    'state':'a unique value'})
         
     else:
         wp.add(jp.P(text="NO QUERY PARAMS"))
     
     wp.add(jp.P(text=f"Redirecting to {url}"))
-    print(url)
+    if resp.status_code == 200:
+        wp.add(jp.P(text="Successfully connected"))
     """
     https://bbtest2.cc.ku.edu/webapps/blackboard/execute/blti/launchPlacement?cmd=authenticate&
     client_id=8b391e79-ab66-4f8a-9fa2-027782f7a598&
@@ -56,8 +57,6 @@ async def launch(request):
     &scope=openid
     &state=a%20unique%20value
     """
-    wp.redirect = 'https://www.google.com'
-    
     return wp
    
 
