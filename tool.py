@@ -27,7 +27,8 @@ async def launch(request):
         lti_message_hint = request.query_params['lti_message_hint']
         target_link_uri = request.query_params['target_link_uri']
 
-        token = requests.get(f"{BACKEND_URL}launch", params=request.query_params).json()
+        r = requests.get(f"{BACKEND_URL}launch", params=request.query_params)
+        r.text
         wp.add(jp.P(text=f"{token}"))
         
     else:
@@ -43,4 +44,4 @@ async def main(request):
     wp.add(jp.P(text='This is the main page'))
     return wp
 
-jp.justpy(start_server=False)
+jp.justpy(start_server=False, websockets=False)
