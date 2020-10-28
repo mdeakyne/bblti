@@ -27,7 +27,7 @@ async def launch(request):
         lti_message_hint = request.query_params['lti_message_hint']
         target_link_uri = request.query_params['target_link_uri']
 
-        token = await jp.get(f"{BACKEND_URL}launch", params=request.query_params)
+        token = requests.get(f"{BACKEND_URL}launch", params=request.query_params)
         wp.add(jp.P(text=f"{token}"))
         
     else:
