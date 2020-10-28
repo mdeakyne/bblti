@@ -27,33 +27,12 @@ async def launch(request):
         lti_message_hint = request.query_params['lti_message_hint']
         target_link_uri = request.query_params['target_link_uri']
 
-        print(login_hint, lti_message_hint, target_link_uri)
-        #
-        print(
-            ge('auth_endpoint'), 
-            {'login_hint':login_hint, 
-            'lti_message_hint':lti_message_hint,
-            'client_id':APP_ID,
-            'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
-            'redirect_uri':target_link_uri,
-            'response_type':'id_token',
-            'scope':'openid',
-            'state':'a unique value'})
+        token = await jp.get(f"{BACKEND}launch", params=request.query_params)
+        wp.add(jp.P(text=f"{token}"))
         
     else:
         wp.add(jp.P(text="NO QUERY PARAMS"))
-    
-    wp.add(jp.P(text=f"Working it out"))
-    """
-    https://bbtest2.cc.ku.edu/webapps/blackboard/execute/blti/launchPlacement?cmd=authenticate&
-    client_id=8b391e79-ab66-4f8a-9fa2-027782f7a598&
-    login_hint=https%253A%252F%252Fbbtest2.cc.ku.edu%252Fwebapps%252Fblackboard%252Fexecute%252Fblti%252FlaunchPlacement%253Fcmd%253Dauthenticate%2C884f23954de74294bff1ab9d1a8a43a7&
-    lti_message_hint=eyJmcm9tVWx0cmEiOmZhbHNlLCJwb3NpdGlvbiI6LTEsInRhcmdldExpbmtVcmwiOiJodHRwczovL2JibHRpLmhlcm9rdWFwcC5jb20iLCJwbGFjZW1lbnRJZCI6Il8zNjRfMSIsInRhcmdldE92ZXJyaWRlIjpudWxsLCJmcm9tR3JhZGVDZW50ZXIiOmZhbHNlLCJvcGVuTmV3V2luZG93IjpmYWxzZSwiZGVlcExpbmtMYXVuY2giOnRydWUsImNvdXJzZUlkIjoiXzIzNzYxNV8xIiwiY29udGVudElkIjoiXzYyMDg0M18xIn0%3D&nonce=fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771
-    &redirect_uri=https%3A%2F%2Fbbltiapi.herokuapp.com%2F
-    &response_type=id_token
-    &scope=openid
-    &state=a%20unique%20value
-    """
+
     return wp
    
 
