@@ -28,8 +28,7 @@ async def launch(request):
         target_link_uri = request.query_params['target_link_uri']
 
         r = requests.get(f"{BACKEND_URL}launch", params=request.query_params)
-        r.text
-        wp.add(jp.P(text=f"{token}"))
+        wp.add(jp.P(text=f"{r.text}"))
         
     else:
         wp.add(jp.P(text="NO QUERY PARAMS"))
