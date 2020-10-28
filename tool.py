@@ -40,11 +40,13 @@ async def launch(request):
                     'response_type':'id_token',
                     'scope':'openid',
                     'state':'a unique value'})
+
+        print(resp.url)
         
     else:
         wp.add(jp.P(text="NO QUERY PARAMS"))
     
-    wp.add(jp.P(text=f"Redirecting to {url}"))
+    wp.add(jp.P(text=f"Redirecting to {resp.url}"))
     if resp.status_code == 200:
         wp.add(jp.P(text="Successfully connected"))
     """
