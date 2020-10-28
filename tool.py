@@ -44,9 +44,6 @@ async def launch(request):
         wp.add(jp.P(text="NO QUERY PARAMS"))
     
     wp.add(jp.P(text=f"Working it out"))
-    
-    if resp.status_code == 200:
-        wp.add(jp.P(text="{resp.text}"))
     """
     https://bbtest2.cc.ku.edu/webapps/blackboard/execute/blti/launchPlacement?cmd=authenticate&
     client_id=8b391e79-ab66-4f8a-9fa2-027782f7a598&
