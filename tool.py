@@ -21,7 +21,6 @@ async def hello(request):
 async def launch(request):
     wp = jp.WebPage()
     url = ''
-    print(BACKEND_URL)
     print(APP_ID)
     if len(request.query_params) > 0:
         login_hint = request.query_params['login_hint']
@@ -29,26 +28,25 @@ async def launch(request):
         target_link_uri = request.query_params['target_link_uri']
 
         print(login_hint, lti_message_hint, target_link_uri)
-        
-        resp = requests.get(
+        #
+        print(
             ge('auth_endpoint'), 
-            params={'login_hint':login_hint, 
-                    'lti_message_hint':lti_message_hint,
-                    'client_id':APP_ID,
-                    'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
-                    'redirect_uri':BACKEND_URL,
-                    'response_type':'id_token',
-                    'scope':'openid',
-                    'state':'a unique value'})
-
-        print(resp.url)
+            {'login_hint':login_hint, 
+            'lti_message_hint':lti_message_hint,
+            'client_id':APP_ID,
+            'nonce':"fc5fdc6d-5dd6-47f4-b2c9-5d1216e9b771",
+            'redirect_uri':target_link_uri,
+            'response_type':'id_token',
+            'scope':'openid',
+            'state':'a unique value'})
         
     else:
         wp.add(jp.P(text="NO QUERY PARAMS"))
     
-    wp.add(jp.P(text=f"Redirecting to {resp.url}"))
+    wp.add(jp.P(text=f"Working it out"))
+    
     if resp.status_code == 200:
-        wp.add(jp.P(text="Successfully connected"))
+        wp.add(jp.P(text="{resp.text}"))
     """
     https://bbtest2.cc.ku.edu/webapps/blackboard/execute/blti/launchPlacement?cmd=authenticate&
     client_id=8b391e79-ab66-4f8a-9fa2-027782f7a598&
